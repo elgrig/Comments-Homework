@@ -2,17 +2,19 @@ import { fetchAndRenderComments } from "../main.js";
 import { postComment, user } from "./api.js";
 import { initLikeComments, initRepostCommentElements } from "./listeners.js";
 import { renderLogin } from "./renderLogin.js";
+import { format } from "date-fns";
 
 
 export const renderComments = ({ comments }) => {
 
   const container = document.querySelector(".comments");
   const commentsHtml = comments.map((comment, index) => {
+    const createDate = format(comment.date, 'yyyy-MM-dd hh.mm.ss');
     return `    
     <li class="comment">
     <div class="comment-header">
         <div>${comment.name}</div>
-        <div>${comment.date}</div>
+        <div>${createDate}</div>
     </div>
     <div class="comment-body" data-index="${index}">    
         <div class="comment-text">
