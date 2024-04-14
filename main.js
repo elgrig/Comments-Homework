@@ -1,6 +1,7 @@
 import { getComments } from "./modules/api.js";
 import { getDate } from "./modules/date.js";
 import { renderComments, renderForm } from "./modules/renderComments.js";
+import { format } from "date-fns";
 
 export let comments = [];
 
@@ -10,7 +11,7 @@ export function fetchAndRenderComments() {
         const appComments = responseData.comments.map((comment) => {
             return {
                 name: comment.author.name,
-                date: getDate(comment.date),
+                date: comment.date,
                 text: comment.text,
                 likes: comment.likes,
                 isLiked: false,
